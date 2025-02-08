@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 
@@ -33,6 +34,9 @@ public class Product {
 	          inverseJoinColumns = @JoinColumn(name = "category_id"))
 
 	private Set<Category> categories = new HashSet<>();
+	
+	@OneToMany(mappedBy = "id.product")  //o produto esta dentro do ID
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Product() {
 
