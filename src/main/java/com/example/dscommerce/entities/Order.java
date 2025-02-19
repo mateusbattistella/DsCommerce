@@ -2,7 +2,10 @@ package com.example.dscommerce.entities;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,6 +41,7 @@ public class Order {
 	
 	@OneToMany(mappedBy = "id.order")  //o order esta dentro do ID
 	private Set<OrderItem> items = new HashSet<>();
+	
 	
 	public Order() {
 		
@@ -92,8 +96,30 @@ public class Order {
 		this.payment = payment;
 	}
 
-	
-	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
+	public List<Product> getProducts(){
+		return items.stream().map(x -> x.getProduct()).toList();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		return Objects.equals(id, other.id);
+	}
 	
 
 }
