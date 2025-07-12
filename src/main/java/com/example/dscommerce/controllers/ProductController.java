@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.dscommerce.dto.CustomError;
 import com.example.dscommerce.dto.ProductDTO;
 import com.example.dscommerce.entities.Product;
 import com.example.dscommerce.repositories.ProductRepository;
@@ -32,8 +33,6 @@ public class ProductController {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-		//ProductDTO dto = service.findByID(id);
-		//return dto;
 		ProductDTO dto = service.findByID(id);
 		return ResponseEntity.ok(dto);
 	}
